@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="loanmanagementsystemModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="loanmanagementsystemModelStoreContainer">
+          <EntitySet Name="admin" EntityType="loanmanagementsystemModel.Store.admin" store:Type="Tables" />
+          <EntitySet Name="loans" EntityType="loanmanagementsystemModel.Store.loans" store:Type="Tables" />
+        </EntityContainer>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="int-rate-personal" Type="nvarchar" MaxLength="100" />
+          <Property Name="int-rate-home" Type="nvarchar" MaxLength="100" />
+          <Property Name="int-rate-company" Type="nvarchar" MaxLength="100" />
+          <Property Name="int-rate-organisation" Type="nvarchar" MaxLength="100" />
+          <Property Name="mortgage" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="loans">
+          <Key>
+            <PropertyRef Name="loan-name" />
+          </Key>
+          <Property Name="customer-name" Type="nvarchar" MaxLength="100" />
+          <Property Name="loan-name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="loan-type" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="tenure" Type="bigint" Nullable="false" />
+          <Property Name="issued" Type="datetime" Nullable="false" />
+          <Property Name="repaydate" Type="datetime" Nullable="false" />
+          <Property Name="emi" Type="money" Nullable="false" />
+          <Property Name="interest" Type="money" Nullable="false" />
+          <Property Name="cost" Type="money" Nullable="false" />
+          <Property Name="status" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+            warning 6013: The table/view 'customers' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+            
+            <EntityType Name="customers">
+              <Property Name="customer-name" Type="nvarchar" MaxLength="100" />
+              <Property Name="customer-address" Type="nvarchar" MaxLength="100" />
+              <Property Name="contact-no" Type="nvarchar" MaxLength="100" />
+              <Property Name="email-id" Type="nvarchar" MaxLength="100" />
+              <Property Name="account-no" Type="nvarchar" MaxLength="100" />
+            </EntityType>-->
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="loanmanagementsystemModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="loanmanagementsystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="loanmanagementsystemModel.admin" />
+          <EntitySet Name="loans" EntityType="loanmanagementsystemModel.loan" />
+        </EntityContainer>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="password" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="int_rate_personal" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="int_rate_home" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="int_rate_company" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="int_rate_organisation" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="mortgage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="loan">
+          <Key>
+            <PropertyRef Name="loan_name" />
+          </Key>
+          <Property Name="customer_name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="loan_name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="loan_type" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="tenure" Type="Int64" Nullable="false" />
+          <Property Name="issued" Type="DateTime" Nullable="false" />
+          <Property Name="repaydate" Type="DateTime" Nullable="false" />
+          <Property Name="emi" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="loanmanagementsystemModelStoreContainer" CdmEntityContainer="loanmanagementsystemEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="loanmanagementsystemModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="int_rate_personal" ColumnName="int-rate-personal" />
+                <ScalarProperty Name="int_rate_home" ColumnName="int-rate-home" />
+                <ScalarProperty Name="int_rate_company" ColumnName="int-rate-company" />
+                <ScalarProperty Name="int_rate_organisation" ColumnName="int-rate-organisation" />
+                <ScalarProperty Name="mortgage" ColumnName="mortgage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="loans">
+            <EntityTypeMapping TypeName="loanmanagementsystemModel.loan">
+              <MappingFragment StoreEntitySet="loans">
+                <ScalarProperty Name="customer_name" ColumnName="customer-name" />
+                <ScalarProperty Name="loan_name" ColumnName="loan-name" />
+                <ScalarProperty Name="loan_type" ColumnName="loan-type" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="tenure" ColumnName="tenure" />
+                <ScalarProperty Name="issued" ColumnName="issued" />
+                <ScalarProperty Name="repaydate" ColumnName="repaydate" />
+                <ScalarProperty Name="emi" ColumnName="emi" />
+                <ScalarProperty Name="interest" ColumnName="interest" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="loanmanagementsystemModel.admin" Width="1.5" PointX="0.75" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+        <EntityTypeShape EntityType="loanmanagementsystemModel.loan" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833326" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
